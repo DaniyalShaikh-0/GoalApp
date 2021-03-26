@@ -23,7 +23,7 @@ export default function App() {
   const set_list=() => {
     num++;
     givekey();
-    setlistgoal(curgoals => [...curgoals,{key : key_unique, value:toString(num) + '  '+inpGoal}]);
+    setlistgoal(curgoals => [...curgoals,{key : key_unique, value:num.toString() + '  '+inpGoal}]);
     // console.log('currenly after adding: ',listgoal);
   }
   const del_cur_item=()=>{
@@ -53,7 +53,8 @@ export default function App() {
       <TextInput style={styles.inputStyle} 
       placeholder='Goals'
       placeholderTextColor='#000000'
-      onChangeText={goalManager}>
+      onChangeText={goalManager}
+      defaultValue='Stock Ivestment'>
     </TextInput>
     </View>
     {/* <ScrollView> */}
@@ -62,8 +63,7 @@ export default function App() {
       (
         <View>
           <TouchableOpacity><Text style={styles.box}>
-      {'   '}{num}
-      { }{itemsr.item.value}</Text></TouchableOpacity>
+      {'   '}{itemsr.item.value}</Text></TouchableOpacity>
         </View>
       )}>
     {/* {listgoal.map((goal) =><TouchableOpacity><Text style={styles.box}>
