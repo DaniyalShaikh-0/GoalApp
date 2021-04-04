@@ -1,0 +1,42 @@
+<View style={styles.container}>
+      <Pressable
+        onPress={() => {
+          setTimesPressed((current) => current + 1);
+        }}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed
+              ? 'rgb(250, 230, 255)'
+              : 'white'
+          },
+          styles.wrapperCustom
+        ]}>
+        {({ pressed }) => (
+          <Text style={styles.box}>
+            {pressed ? 'Task Completed' : }
+          </Text>
+        )}
+      </Pressable>
+      <View style={styles.logBox}>
+        <Text testID="pressable_press_console">{textLog}</Text>
+      </View>
+    </View>
+
+<Pressable
+        onPress={() => {
+          givekey();
+        }}
+        style={({ pressed }) => [
+          {
+            backgroundColor: pressed
+              ? 'darkblue'
+              : 'skyblue'
+          },
+          styles.wrapperCustom
+        ]}>
+        {({ pressed }) => (
+         <Text style={styles.box}>
+            {pressed ? 'Task Completed' :  {'   '}{itemsr.item.value}}
+          </Text>
+        )}
+</Pressable>
