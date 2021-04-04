@@ -1,14 +1,14 @@
 import React,{useState} from 'react';
 import { StyleSheet,
-   Text, View,TextInput,Button, 
+   Text, View,TextInput,Button,Pressable,
    StatusBar,TouchableOpacity,
    ScrollView,FlatList } from 'react-native';
 // import {Input, Button} from 'react-native-elements';
 import UselessTextInput from './app/screens/NewScr.js';
-let txt='';
+let default_='Stock Investment';
 let num=0;
 export default function App() {
-  const [inpGoal,funcInpGoal]=useState('');
+  const [inpGoal,funcInpGoal]=useState(default_);
   const [listgoal ,setlistgoal]=useState([]);
   const [key_unique,setkeyunique]=useState(0);
   const givekey=()=>{
@@ -17,13 +17,21 @@ export default function App() {
   const goalManager = (text_inp) =>{
     funcInpGoal(text_inp);
   }
-  const saveSt = () =>{
-    txt=txt+'\n'+inpGoal;
+  const showKey= ()=>{
+    console.log('Key right now is : ',key_unique);
+    // return(
+    //   <Text>
+    //     Goal Achieved
+    //   </Text>
+    //   );
   }
+  // const saveSt = () =>{
+  //   txt=txt+'\n'+inpGoal;
+  // }
   const set_list=() => {
     num++;
     givekey();
-    setlistgoal(curgoals => [...curgoals,{key : key_unique, value:num.toString() + '  '+inpGoal}]);
+    setlistgoal(curgoals => [...curgoals,{key : key_unique.toString(), value:num.toString() + '  '+inpGoal}]);
     // console.log('currenly after adding: ',listgoal);
   }
   const del_cur_item=()=>{
@@ -36,6 +44,8 @@ export default function App() {
     setlistgoal(listgoal.slice(1,listgoal.length));
     // console.log('currenly after delete_prev: ',listgoal);
   }
+  function Textmy(texts) {
+      return '   '+texts;}
   return (
     <View style={styles.container}>
       <View style={styles.newBut}>
@@ -53,8 +63,7 @@ export default function App() {
       <TextInput style={styles.inputStyle} 
       placeholder='Goals'
       placeholderTextColor='#000000'
-      onChangeText={goalManager}
-      defaultValue='Stock Ivestment'>
+      onChangeText={goalManager}>
     </TextInput>
     </View>
     {/* <ScrollView> */}
@@ -62,8 +71,22 @@ export default function App() {
       <FlatList data={listgoal} renderItem={itemsr => 
       (
         <View>
-          <TouchableOpacity><Text style={styles.box}>
-      {'   '}{itemsr.item.value}</Text></TouchableOpacity>
+          <Pressable onPress={showKey} style={({ pressed }) => [
+          {
+            backgroundColor: pressed
+              ? 'dodgerblue'
+              : 'skyblue'
+          },
+          styles.box
+        ]}>
+        {({ pressed }) => (
+          <Text style={styles.box}>
+            {pressed ? 'Task Completed' : Textmy(itemsr.item.value)}
+          </Text>
+        )}
+      {/* <Text>
+      {Textmy()}</Text> */}
+      </Pressable>
         </View>
       )}>
     {/* {listgoal.map((goal) =><TouchableOpacity><Text style={styles.box}>
@@ -103,7 +126,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   box: {
-    backgroundColor: 'skyblue',
+    // backgroundColor: 'skyblue',
     height:30,
     width:'100%',
     margin:5
