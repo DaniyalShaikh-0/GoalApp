@@ -17,8 +17,35 @@ export default function App() {
   const goalManager = (text_inp) =>{
     funcInpGoal(text_inp);
   }
-  const showKey= ()=>{
-    console.log('Key right now is : ',key_unique);
+  function remove(array, element) {
+    const index = array.indexOf(element);
+  
+    if (index !== -1) {
+      array.splice(index, 1);
+    }
+    return(array);
+  }
+  const showKey= recvd =>{
+    // console.log('Inp goal is : ',inpGoal,'\nKey right now is : '
+    // ,key_unique ,'also using func ket is: ',recvd.key ,'\n\nBut   INDEX IS :  ',listgoal.indexOf(inpGoal));
+    for (var i in listgoal)
+    {try {
+      if (listgoal[i].key===recvd.key)
+      {
+        console.log('THe item is FOUND NOW');
+        console.log(recvd)
+        break;
+      }
+      console.log('\nI is : ',listgoal[i],'  & index is : ',i);
+    }
+    catch (e)
+    {
+      console.log('Cant type is : ',typeof(listgoal[i]));
+      break;
+    }
+  }
+    
+    
     // return(
     //   <Text>
     //     Goal Achieved
@@ -33,6 +60,13 @@ export default function App() {
     givekey();
     setlistgoal(curgoals => [...curgoals,{key : key_unique.toString(), value:num.toString() + '  '+inpGoal}]);
     // console.log('currenly after adding: ',listgoal);
+  }
+  const del_sel_item = recvd => {
+    num > 0 ? num-=1 : 1;
+    let ind=listgoal.indexOf(recvd);
+    let l1=listgoal.slice(0,ind);
+    setlistgoal(l1.concat(listgoal.slice(ind+1,listgoal.length))); //SLICING ARRAYS
+    console.log('Hello world from long press !! curr item is ',recvd.value)
   }
   const del_cur_item=()=>{
     num > 0 ? num-=1 : 1;
@@ -71,14 +105,14 @@ export default function App() {
       <FlatList data={listgoal} renderItem={itemsr => 
       (
         <View>
-          <Pressable onPress={showKey} style={({ pressed }) => [
+          <Pressable onPress={()=>showKey(itemsr.item)} style={({ pressed }) => [
           {
             backgroundColor: pressed
               ? 'dodgerblue'
               : 'skyblue'
           },
           styles.box
-        ]}>
+        ]} onLongPress={() => del_sel_item(itemsr.item)}>
         {({ pressed }) => (
           <Text style={styles.box}>
             {pressed ? 'Task Completed' : Textmy(itemsr.item.value)}
