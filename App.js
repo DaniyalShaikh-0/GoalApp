@@ -130,6 +130,10 @@ export default function App() {
           modeManager={setModalState}
           mode={modalState}
           CloseButton={styles.close}
+          layer={styles.invis}
+          inputStyle={styles.inputContainer}
+          goalManager={goalManager}
+          inpGoal={inpGoal}
         ></Buttons>
         {/* <View style={styles.newBut}>
         <Button title="ADD" color="#66ff33" onPress={set_list}></Button>
@@ -146,7 +150,7 @@ export default function App() {
           onPress={del_prev_item}
         ></Button>c
       </View> */}
-        <View style={styles.invis} />
+        {/* <View style={styles.invis} />
         <View style={styles.inputContainer}>
           <CurrGoal handleGoal={goalManager} value={inpGoal} />
           {/* <TextInput style={styles.inputStyle}
@@ -154,7 +158,7 @@ export default function App() {
       placeholderTex tColor='#000000'
       onChangeText={goalManager}>
     </TextInput> */}
-        </View>
+        {/* </View> */}
         {/* <ScrollView> */}
         {/* <View> */}
         <FlatList
